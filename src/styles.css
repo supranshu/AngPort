@@ -60,6 +60,7 @@
     box-shadow: 
       inset 0 0 30px var(--screen-shadow-color),
       inset 0 0 10px rgba(255, 255, 255, 0.1);
+    color: white;
   }
   
   /* Custom Scrollbar */
@@ -140,34 +141,13 @@
   @media screen and (max-width: 768px) {
     .desktop-container {
       width: 95%;
-      transform: rotateX(0) rotateY(0);
-      animation: none;
-    }
-  
-    .desktop-monitor {
-      border-radius: 10px;
-      box-shadow: 
-        0 10px 20px rgba(0, 0, 0, 0.5),
-        inset 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-  
-    .desktop-stand, .desktop-base {
-      display: none; /* Remove stand for mobile */
-    }
-  
-    .desktop-screen {
-      box-shadow: 
-        inset 0 0 15px var(--screen-shadow-color);
+      transform: rotateX(10deg) rotateY(-15deg); /* Keep original 3D look */
     }
   }
   
-  /* Small Mobile Devices */
   @media screen and (max-width: 480px) {
     .desktop-container {
       width: 98%;
     }
-  
-    .desktop-monitor {
-      border-radius: 5px;
-    }
   }
+  
