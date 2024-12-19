@@ -27,7 +27,7 @@ html, body {
 /* Desktop Container */
 .desktop-container {
   position: relative;
-  width: 90%;
+  width: 98%;
   max-width: 1200px;
   transform: rotateX(10deg) rotateY(-15deg);
   transform-style: preserve-3d;
@@ -64,6 +64,28 @@ html, body {
   color: white;
 }
 
+/* Sparkle Styles */
+.sparkle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.5);
+    opacity: 0;
+  }
+}
+
 /* Stand and Base */
 .desktop-stand, .desktop-base {
   position: absolute;
@@ -76,13 +98,13 @@ html, body {
 .desktop-stand {
   bottom: -40px;
   width: 120px;
-  height: 60px;
+  height: 70px;
   border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 1);
 }
 
 .desktop-base {
-  bottom: -100px;
+  bottom: -20px;
   width: 250px;
   height: 30px;
   border-radius: 15px;
@@ -130,8 +152,9 @@ html, body {
       z-index: 3;
   }
 
-  .desktop-monitor::before {
-      content: '';
+  /* Home button */
+  .home-button {
+      display: block;
       position: absolute;
       bottom: 20px;
       left: 50%;
@@ -140,7 +163,17 @@ html, body {
       height: 40px;
       border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 50%;
-      z-index: 3;
+      z-index: 1000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+
+  .home-button:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .home-button:active {
+      transform: translateX(-50%) scale(0.95);
   }
 }
 
@@ -153,6 +186,6 @@ html, body {
 /* Smaller mobile adjustments */
 @media screen and (max-width: 480px) {
   .desktop-container {
-      width: 280px;
+      width: 320px;
   }
 }
