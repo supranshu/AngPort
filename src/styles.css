@@ -1,187 +1,158 @@
-/* Enhanced Responsive Desktop Screen Styles */
+/* Enhanced Root Variables */
 :root {
-    --bg-dark-primary: #141e30;
-    --bg-dark-secondary: #243b55;
-    --monitor-frame-color: #1e1e1e;
-    --screen-shadow-color: rgba(0, 0, 0, 0.8);
-    --accent-glow: rgba(33, 150, 243, 0.6);
-  }
-  
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--bg-dark-primary), var(--bg-dark-secondary));
-    overflow: hidden;
-    perspective: 1500px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Desktop Container with Responsive Scaling */
-  .desktop-container {
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    transform: rotateX(10deg) rotateY(-15deg);
-    transform-style: preserve-3d;
-    animation: swing 6s infinite alternate ease-in-out;
-    transition: all 0.3s ease;
-  }
-  
-  /* Realistic Monitor Design */
-  .desktop-monitor {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: var(--monitor-frame-color);
-    border-radius: 15px;
-    box-shadow: 
-      0 30px 50px rgba(0, 0, 0, 0.7), 
+  --bg-dark-primary: #141e30;
+  --bg-dark-secondary: #243b55;
+  --monitor-frame-color: #1e1e1e;
+  --screen-shadow-color: rgba(0, 0, 0, 0.8);
+  --accent-glow: rgba(33, 150, 243, 0.6);
+  --phone-frame-color: #2c3e50;
+  --phone-screen-color: #000;
+}
+
+/* Base Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-dark-primary), var(--bg-dark-secondary));
+  overflow: hidden;
+  perspective: 1500px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Desktop Container */
+.desktop-container {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  transform: rotateX(10deg) rotateY(-15deg);
+  transform-style: preserve-3d;
+  animation: swing 6s infinite alternate ease-in-out;
+  transition: all 0.5s ease;
+}
+
+/* Monitor Styles */
+.desktop-monitor {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--monitor-frame-color);
+  border-radius: 15px;
+  box-shadow: 
+      0 30px 50px rgba(0, 0, 0, 0.7),
       inset 0 0 15px rgba(255, 255, 255, 0.2),
       0 0 60px var(--accent-glow);
-    overflow: hidden;
-    transform: translateZ(50px);
-    border: 8px solid #2c3e50;
-    position: relative;
+  overflow: hidden;
+  transform: translateZ(50px);
+  border: 8px solid #2c3e50;
+  transition: all 0.5s ease;
+}
+
+/* Screen Styles */
+.desktop-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--phone-screen-color);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  box-shadow: inset 0 0 30px var(--screen-shadow-color);
+  color: white;
+}
+
+/* Stand and Base */
+.desktop-stand, .desktop-base {
+  position: absolute;
+  left: 50%;
+  background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  transform: translateX(-50%);
+  transition: all 0.5s ease;
+}
+
+.desktop-stand {
+  bottom: -40px;
+  width: 120px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.desktop-base {
+  bottom: -100px;
+  width: 250px;
+  height: 30px;
+  border-radius: 15px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Animation */
+@keyframes swing {
+  0% { transform: rotateX(10deg) rotateY(-15deg) scale(1); }
+  100% { transform: rotateX(12deg) rotateY(-10deg) scale(1.02); }
+}
+
+/* Mobile Phone Transform */
+@media screen and (max-width: 768px) {
+  .desktop-container {
+      width: 300px;
+      transform: rotateX(0) rotateY(0) rotate(0);
+      animation: phoneSwing 4s infinite alternate ease-in-out;
   }
-  
-  /* Screen with Enhanced Details */
-  .desktop-screen {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    box-shadow: 
-      inset 0 0 30px var(--screen-shadow-color),
-      inset 0 0 10px rgba(255, 255, 255, 0.1);
-    color: white;
+
+  .desktop-monitor {
+      aspect-ratio: 9 / 16;
+      border-radius: 30px;
+      border-width: 12px;
+      transform: translateZ(0);
   }
-  
-  /* Custom Scrollbar */
-  .desktop-screen::-webkit-scrollbar {
-    width: 10px;
+
+  /* Hide desktop stand and base */
+  .desktop-stand, .desktop-base {
+      opacity: 0;
+      visibility: hidden;
   }
-  
-  .desktop-screen::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
+
+  /* Phone-specific elements */
+  .desktop-monitor::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 15px;
+      background: #000;
+      border-radius: 10px;
+      z-index: 3;
   }
-  
-  .desktop-screen::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 5px;
-    transition: background 0.3s ease;
-  }
-  
-  .desktop-screen::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.7);
-  }
-  
-  /* Monitor Screen Overlay Effect */
+
   .desktop-monitor::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%),
-      linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
-    z-index: 2;
-    pointer-events: none;
-    mix-blend-mode: overlay;
-  }
-  
-  /* Stand and Base with Depth */
-  .desktop-stand {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    width: 120px;
-    height: 60px;
-    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
-    transform: translateX(-50%);
-    border-radius: 10px;
-    box-shadow: 
-      0 10px 20px rgba(0, 0, 0, 0.6), 
-      inset 0 0 10px rgba(255, 255, 255, 0.1);
-  }
-  
-  .desktop-base {
-    position: absolute;
-    bottom: -100px;
-    left: 50%;
-    width: 250px;
-    height: 30px;
-    background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
-    transform: translateX(-50%);
-    border-radius: 15px;
-    box-shadow: 
-      0 15px 25px rgba(0, 0, 0, 0.7), 
-      inset 0 0 12px rgba(255, 255, 255, 0.1);
-  }
-  
-  /* 3D Swing Animation */
-  @keyframes swing {
-    0% {
-      transform: rotateX(10deg) rotateY(-15deg) scale(1);
-    }
-    100% {
-      transform: rotateX(12deg) rotateY(-10deg) scale(1.02);
-    }
-  }
-  
-  /* Mobile Responsiveness */
-  @media screen and (max-width: 768px) {
-    .desktop-container {
-      width: 100%;
-      transform: rotateX(0) rotateY(0); /* Remove 3D effect for smaller screens */
-    }
-  
-    .desktop-monitor {
-      transform: translateZ(0);
-      border: 4px solid #2c3e50;
-    }
-  
-    .desktop-stand {
-      bottom: -20px;
-      width: 80px;
+      content: '';
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
       height: 40px;
-    }
-  
-    .desktop-base {
-      bottom: -50px;
-      width: 150px;
-      height: 20px;
-    }
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      z-index: 3;
   }
-  
-  @media screen and (max-width: 480px) {
-    .desktop-container {
-      width: 100%;
-      transform: rotateX(0) rotateY(0); /* Remove 3D effect for smaller screens */
-    }
-  
-    .desktop-monitor {
-      transform: translateZ(0);
-      border: 4px solid #2c3e50;
-    }
-  
-    .desktop-stand {
-      bottom: -20px;
-      width: 80px;
-      height: 40px;
-    }
-  
-    .desktop-base {
-      bottom: -50px;
-      width: 150px;
-      height: 20px;
-    }
+}
+
+/* Phone animation */
+@keyframes phoneSwing {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+/* Smaller mobile adjustments */
+@media screen and (max-width: 480px) {
+  .desktop-container {
+      width: 280px;
   }
+}
